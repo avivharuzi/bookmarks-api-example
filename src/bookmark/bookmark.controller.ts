@@ -10,6 +10,9 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+
+import { Bookmark } from '@prisma/client';
+
 import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard';
 import { BookmarkService } from './bookmark.service';
@@ -21,7 +24,7 @@ export class BookmarkController {
   constructor(private readonly bookmarkService: BookmarkService) {}
 
   @Get()
-  getBookmarks(@GetUser('id') userId: string) {
+  getBookmarks(@GetUser('id') userId: string): Promise<Bookmark[]> {
     return this.bookmarkService.getBookmarks(userId);
   }
 
@@ -29,7 +32,7 @@ export class BookmarkController {
   getBookmarkById(
     @GetUser('id') userId: string,
     @Param('id') bookmarkId: string,
-  ) {
+  ): Promise<Bookmark> {
     return this.bookmarkService.getBookmarkById(userId, bookmarkId);
   }
 
@@ -37,7 +40,7 @@ export class BookmarkController {
   createBookmark(
     @GetUser('id') userId: string,
     @Body() dto: CreateBookmarkDto,
-  ) {
+  ): Promise<Bookmark> {
     return this.bookmarkService.createBookmark(userId, dto);
   }
 
@@ -46,7 +49,7 @@ export class BookmarkController {
     @GetUser('id') userId: string,
     @Param('id') bookmarkId: string,
     @Body() dto: EditBookmarkDto,
-  ) {
+  ): Promise<Bookmark> {
     return this.bookmarkService.editBookmarkById(userId, bookmarkId, dto);
   }
 
@@ -55,7 +58,7 @@ export class BookmarkController {
   deleteBookmarkById(
     @GetUser('id') userId: string,
     @Param('id') bookmarkId: string,
-  ) {
+  ): Promise<void> {
     return this.bookmarkService.deleteBookmarkById(userId, bookmarkId);
   }
 }

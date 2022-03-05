@@ -1,12 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
+
+import * as pactum from 'pactum';
+
+import { AppModule } from '../src/app.module';
 import { AuthDto } from '../src/auth/dto';
 import { CreateBookmarkDto, EditBookmarkDto } from '../src/bookmark/dto';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { EditUserDto } from '../src/user/dto';
-import { AppModule } from './../src/app.module';
-import * as pactum from 'pactum';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
