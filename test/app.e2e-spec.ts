@@ -46,10 +46,7 @@ describe('AppController (e2e)', () => {
 
     describe('Signup', () => {
       it('should throw if body is missing', () => {
-        return pactum
-          .spec()
-          .post('/auth/signup')
-          .expectStatus(400);
+        return pactum.spec().post('/auth/signup').expectStatus(400);
       });
 
       it('should throw if email is missing', () => {
@@ -83,10 +80,7 @@ describe('AppController (e2e)', () => {
 
     describe('Signin', () => {
       it('should throw if body is missing', () => {
-        return pactum
-          .spec()
-          .post('/auth/signin')
-          .expectStatus(400);
+        return pactum.spec().post('/auth/signin').expectStatus(400);
       });
 
       it('should throw if email is missing', () => {
@@ -123,10 +117,7 @@ describe('AppController (e2e)', () => {
   describe('User', () => {
     describe('Get me', () => {
       it('should get unauthorized if no token', () => {
-        return pactum
-          .spec()
-          .get('/users/me')
-          .expectStatus(401);
+        return pactum.spec().get('/users/me').expectStatus(401);
       });
 
       it('should get user info', () => {
